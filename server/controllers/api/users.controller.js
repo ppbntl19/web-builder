@@ -1,4 +1,4 @@
-﻿var config = require('config.json');
+﻿var config = require('config.js');
 var express = require('express');
 var jwt = require('express-jwt')({ secret: config.secret });
 var router = express.Router();

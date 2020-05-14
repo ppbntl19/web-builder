@@ -1,4 +1,4 @@
-﻿var config = require('config.json');
+﻿var config = require('config.js');
 var nodemailer = require('nodemailer');
 var express = require('express');
 var router = express.Router();

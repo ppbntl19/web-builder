@@ -6,8 +6,7 @@ var compression = require('compression');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var bodyParser = require('body-parser');
-var config = require('config.json');
-
+var config = require('config.js');
 // enable ejs templates to have .html extension
 app.engine('html', ejs.renderFile);
 app.set('view engine', 'html');
@@ -49,17 +48,24 @@ app.get('/token', function (req, res) {
 });
 
 // standalone pages
-app.use('/install', require('./controllers/install.controller'));
-app.use('/login', require('./controllers/login.controller'));
+if (process.env.enable_install) {
+    app.use('/install', require('./controllers/install.controller'));
+}
+if (process.env.enable_admin_panel) {
+    app.use('/login', require('./controllers/login.controller'));
+    // admin section
+    app.use('/admin', require('./controllers/admin.controller'));
+}
 
-// admin section
-app.use('/admin', require('./controllers/admin.controller'));
 
 // blog front end
 app.use('/', require('./controllers/blog.controller'));
-
+//Default
+app.use(function(req, res){
+    res.redirect('/');
+});
 // start server
-var port = process.env.NODE_ENV === 'production' ? 80 : 3000;
+var port = process.env.NODE_ENV === 'production' ? ( process.env.PORT || 3000 )  : 3000;
 var server = app.listen(port, function () {
     console.log('Server listening on port ' + port);
 });

@@ -23,6 +23,13 @@
                         '/?xhr=1' + (stateParams.page ? '&page=' + stateParams.page : '');
                 }
             })
+            .state('posts', {
+                url: '/posts?:page',
+                templateUrl: function (stateParams) {
+                    return window.initialLoad ? null :
+                        '/posts?xhr=1' + (stateParams.page ? '&page=' + stateParams.page : '');
+                }
+            })
             .state('post-details', {
                 url: '/post/:year/:month/:day/:slug',
                 templateUrl: function (stateParams) {
@@ -65,6 +72,7 @@
                 url: '/contact-thanks',
                 templateUrl: '/contact-thanks?xhr=1'
             });
+
 
         // mark all requests from angular as ajax requests
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

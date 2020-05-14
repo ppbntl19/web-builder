@@ -9,7 +9,7 @@ var argv = require('yargs').argv;
 
 var basePath = '../client';
 
-gulp.task('less', function () {
+gulp.task('less', function (done) {
     compileLess('admin');
     compileLess('blog');
 
@@ -20,15 +20,16 @@ gulp.task('less', function () {
             .pipe(minifyCSS())
             .pipe(gulp.dest(basePath + '/' + app + '/_dist/'));
     }
+    done();
 });
 
-gulp.task('scripts', function () {
+gulp.task('scripts', function (done) {
     compileScripts('admin');
     compileScripts('blog');
 
     function compileScripts(app) {
         // include all .js files except for a couple of folders
-        return gulp.src([
+         gulp.src([
                 basePath + '/' + app + '/**/*.js', 
                 '!' + basePath + '/' + app + '/_content/**/*.js', 
                 '!' + basePath + '/' + app + '/_dist/**/*.js'
@@ -38,9 +39,10 @@ gulp.task('scripts', function () {
             .pipe(concat('app.min.js'))
             .pipe(gulp.dest(basePath + '/' + app + '/_dist'));
     }
+    done()
 });
 
-gulp.task('watch', function () {
+gulp.task('watch', function (done) {
     setupWatches('admin');
     setupWatches('blog');
 
@@ -48,6 +50,12 @@ gulp.task('watch', function () {
         gulp.watch(basePath + '/' + app + '/_content/*.less', ['less']);
         gulp.watch([basePath + '/' + app + '/**/*.js', '!' + basePath + '/' + app + '/_dist/**/*.js'], ['scripts']);
     }
+    done()
 });
 
-gulp.task('default', ['watch', 'scripts', 'less']);
+//gulp.task('default', ['watch', 'scripts', 'less']);
+//gulp.task('default', gulp.series(, 'scripts', 'less'));
+gulp.task('default', gulp.parallel(
+    'scripts'
+)
+);

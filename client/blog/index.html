@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="/_content/images/logo.png" type="image/png" />
     <link rel="icon" href="/_content/images/logo.png" type="image/png" />
 
-    <title><%- locals.metaTitle || "MEANie Blog" %></title>
+    <title><%- locals.metaTitle || "Home" %></title>
     <meta name="description" content="<%- locals.metaDescription || "MEANie Blog" %>" />
 
     <style>
@@ -43,30 +43,9 @@
 </head>
 <body>
     <!-- nav -->
-    <div class="navbar navbar-inverse navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" ng-click="showNav = !showNav">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">
-                    <img src="/_content/images/logo.png" />
-                    <span>MEANie</span>
-                </a>
-            </div>
-            <div class="navbar-collapse ng-cloak" ng-class="{'in': showNav, 'collapse': !showNav}">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/archive">Archive</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
+    <%- locals.headerBody %>
     <!-- main -->
+
     <main ui-view>
         <% if(locals.templateUrl) { %>
             <div ng-non-bindable>
@@ -76,38 +55,9 @@
 	</main>
 
     <!-- footer -->
-    <div id="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4">
-                    <h4>About</h4>
-                    <p>
-                        MEANie is a blogging platform built with the MEAN Stack (MongoDB, ExpressJS, AngularJS, NodeJS). 
-                    </p>
-                    <p>
-                        It's been designed with developers in mind, to be easily extensible and customisable throughout the code base.
-                    </p>
-                </div>
-                <div class="col-sm-4">
-                    <h4>Months</h4>
-                    <%- include('_partials/month-list.html') %>
-                </div>
-                <div class="col-sm-4">
-                    <h4>Tags</h4>
-                    <%- include('_partials/tag-list.html') %>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container text-center copyright">
-        Powered by <a href="http://jasonwatmore.com/meanie" target="_blank">MEANie - The MEAN Stack Blog</a>
-    </div>
+    <%- locals.footerBody %>
 
     <!-- carbon ads -->
-    <div class="carbonads-container">
-        <div class="ad-title">Sponsored by <span class="close-ad icon-cross"></span></div>
-        <script async type="text/javascript" src="/carbonads.js?zoneid=1673&serve=C6AILKT&placement=jasonwatmore&d=<%= new Date().toISOString().slice(0, 13) %>" id="_carbonads_js"></script>
-    </div>
 
     <!-- syntax highlighter -->
     <script src="/_content/syntaxhighlighter/js/shCore.js"></script>
@@ -131,6 +81,7 @@
 
     <!-- jquery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <script>
         $(function () {
