@@ -1,10 +1,10 @@
 {
-    "name": "meanie",
+    "name": "Web-Builder",
     "version": "1.0.0",
-    "description": "MEANie - MEAN Stack Blogging Platform",
+    "description": "Cloud Components Web-Builder A Blogging Platform",
     "repository": {
         "type": "git",
-        "url": "https://github.com/cornflourblue/meanie.git"
+        "url": "https://github.com/ppbntl19/web-builder"
     },
     "dependencies": {
         "bcryptjs": "^2.1.0",

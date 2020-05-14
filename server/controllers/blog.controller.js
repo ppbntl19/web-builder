@@ -15,7 +15,7 @@ var pager = require('helpers/pager');
 var Q = require('q');
 var basePath = path.resolve('../client/blog');
 var indexPath = basePath + '/index';
-var metaTitleSuffix = " | MEANie - The MEAN Stack Blog";
+var metaTitleSuffix =  process.env.metaTitleSuffix ||  "Cloud Components Web-Builder";
 var oneWeekSeconds = 60 * 60 * 24 * 7;
 var oneWeekMilliseconds = oneWeekSeconds * 1000;
 
