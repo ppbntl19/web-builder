@@ -9,10 +9,6 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    if (config.installed) {
-        return res.sendStatus(401);
-    }
-
     // create user
     userService.create(req.body)
         .then(function () {
