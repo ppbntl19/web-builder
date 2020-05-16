@@ -49,7 +49,7 @@
                     // Fill all necessary fields for Cloudinary
                     var fd = new FormData();
                     fd.append('upload_preset', unsignedUploadPreset);
-                    fd.append('folder', location.hostname + 'content/articles'); // Optional - place image at specific folder admin in Cloudinary
+                    fd.append('folder', location.hostname + '/content/articles'); // Optional - place image at specific folder admin in Cloudinary
                     fd.append('tags', 'browser_upload'); // Optional - add tag for image admin in Cloudinary
                     fd.append('file', evt.data.fileLoader.file);
 
