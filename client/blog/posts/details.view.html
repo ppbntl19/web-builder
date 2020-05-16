@@ -20,6 +20,11 @@
         </div>
         <hr />
 
+        <div id="fb-root">&nbsp;</div>
+       
+        
+        <!-- comments -->
+        <div class="fb-comments" data-href="<%= locals.post.permalink %>" data-numposts="5" data-width="">&nbsp;</div>
         <!-- comments -->
         <div id="disqus_thread"></div>
         <script>
@@ -36,17 +41,18 @@
                 // load disqus script the first time the view loads
                 (function () {
                     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                    dsq.src = '//meaniedemo.disqus.com/embed.js';
+                    dsq.src = '//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=226370784891812&autoLogAppEvents=1';
                     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
                 })();
 
                 window.postViewLoaded = true;
-            } else if (window.DISQUS) {
-                // else if disqus already loaded call DISQUS.reset
-                DISQUS.reset({
-                    reload: true,
-                    config: disqus_config
-                });
+            }  else {
+                typeof FB != 'undefined' && FB.init({
+                    appId      : '226370784891812',
+                    status     : true,
+                    xfbml      : true,
+                    version    : 'v7.0' // or v2.6, v2.5, v2.4, v2.3
+                    });
             }
         </script>
     </div>
