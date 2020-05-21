@@ -6,27 +6,36 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" href="/_content/images/logo.png" type="image/png" />
-    <link rel="icon" href="/_content/images/logo.png" type="image/png" />
+    <link rel="shortcut icon" href="<%- locals.metaIconURL || '/_content/images/logo.png' %>" type="image/png" />
+    <link rel="icon" href="<%- locals.metaIconURL || '/_content/images/logo.png' %>" type="image/png" />
 
     <title><%- locals.metaTitle || "Home" %></title>
     <meta name="description" content="<%- locals.metaDescription || "Cloud-Components" %>" />
+    
+    <% if(locals.css_include) { %>
+        <%- locals.css_include %>
+    <% } else { %>
+        <style>
+            /* fonts & icons */
+            <%- include('_content/fonts/montserrat.css') %>
+            <%- include('_content/icomoon/style.css') %>
 
-    <style>
-        /* fonts & icons */
-        <%- include('_content/fonts/montserrat.css') %>
-        <%- include('_content/icomoon/style.css') %>
+            /* bootstrap */
+            <%- include('_content/bootstrap.css') %>
 
-        /* bootstrap */
-        <%- include('_content/bootstrap.css') %>
+            /* syntax higlighter */
+            <%- include('_content/syntaxhighlighter/css/shCore.css') %>
+            <%- include('_content/syntaxhighlighter/css/shThemeDefault.css') %>
 
-        /* syntax higlighter */
-        <%- include('_content/syntaxhighlighter/css/shCore.css') %>
-        <%- include('_content/syntaxhighlighter/css/shThemeDefault.css') %>
+            /* custom */
+            <%- include('_dist/app.css') %>
+        </style>
+    <% } %>
 
-        /* custom */
-        <%- include('_dist/app.css') %>
-    </style>
+    <% if(locals.style) { %>
+        <%- locals.style %>
+    <%  } %>
+
 
     <% if(!locals.loggedIn) { // don't record traffic if logged in %>
         <!-- analytics -->
@@ -40,8 +49,11 @@
             ga('create', '<%= locals.googleAnalyticsAccount %>', 'auto');
         </script>
     <% } %>
+
 </head>
+
 <body>
+
     <!-- nav -->
     <%- locals.headerBody %>
     <!-- main -->
@@ -57,45 +69,40 @@
     <!-- footer -->
     <%- locals.footerBody %>
 
-    <!-- carbon ads -->
-
-    <!-- syntax highlighter -->
-    <script src="/_content/syntaxhighlighter/js/shCore.js"></script>
-    <script src="/_content/syntaxhighlighter/js/shBrushCSharp.js"></script>
-    <script src="/_content/syntaxhighlighter/js/shBrushCss.js"></script>
-    <script src="/_content/syntaxhighlighter/js/shBrushJScript.js"></script>
-    <script src="/_content/syntaxhighlighter/js/shBrushPlain.js"></script>
-    <script src="/_content/syntaxhighlighter/js/shBrushSql.js"></script>
-    <script src="/_content/syntaxhighlighter/js/shBrushVb.js"></script>
-    <script src="/_content/syntaxhighlighter/js/shBrushXml.js"></script>
-    <script>
-        SyntaxHighlighter.defaults['gutter'] = true;
-        SyntaxHighlighter.defaults['smart-tabs'] = true;
-        SyntaxHighlighter.defaults['auto-links'] = true;
-        SyntaxHighlighter.defaults['collapse'] = false;
-        SyntaxHighlighter.defaults['light'] = false;
-        SyntaxHighlighter.defaults['tab-size'] = 4;
-        SyntaxHighlighter.defaults['toolbar'] = true;
-        SyntaxHighlighter.defaults['wrap-lines'] = true;
-    </script>
-
-    <!-- jquery -->
+    <!-- Script -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <script>
-        $(function () {
-            window.setTimeout(function () {
-                // wait a couple of seconds to show ad
-                $('.carbonads-container').fadeIn();
-            }, 2000);
+    <% if(locals.script_include) { %>
+        <%- locals.script_include %>
+    <% } else { %>
+        <!-- syntax highlighter -->
+        <script src="/_content/syntaxhighlighter/js/shCore.js"></script>
+        <script src="/_content/syntaxhighlighter/js/shBrushCSharp.js"></script>
+        <script src="/_content/syntaxhighlighter/js/shBrushCss.js"></script>
+        <script src="/_content/syntaxhighlighter/js/shBrushJScript.js"></script>
+        <script src="/_content/syntaxhighlighter/js/shBrushPlain.js"></script>
+        <script src="/_content/syntaxhighlighter/js/shBrushSql.js"></script>
+        <script src="/_content/syntaxhighlighter/js/shBrushVb.js"></script>
+        <script src="/_content/syntaxhighlighter/js/shBrushXml.js"></script>
+        <script>
+            SyntaxHighlighter.defaults['gutter'] = true;
+            SyntaxHighlighter.defaults['smart-tabs'] = true;
+            SyntaxHighlighter.defaults['auto-links'] = true;
+            SyntaxHighlighter.defaults['collapse'] = false;
+            SyntaxHighlighter.defaults['light'] = false;
+            SyntaxHighlighter.defaults['tab-size'] = 4;
+            SyntaxHighlighter.defaults['toolbar'] = true;
+            SyntaxHighlighter.defaults['wrap-lines'] = true;
+        </script>
 
-            // enable closing of ad
-            $('.close-ad').click(function () {
-                $('.carbonads-container').hide();
-            });
-        });
-    </script>
+        <!-- jquery -->
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <% } %>
+
+    <!-- Cusotm js -->
+    <% if(locals.script) {  %>
+        <%- locals.script %>
+    <% } %>
 
     <!-- angular -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>

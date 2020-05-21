@@ -15,7 +15,8 @@ var pager = require('helpers/pager');
 var Q = require('q');
 var basePath = path.resolve('../client/blog');
 var indexPath = basePath + '/index';
-var metaTitleSuffix =  process.env.metaTitleSuffix ||  "Cloud Components Web-Builder";
+var metaTitleSuffix =  " " + process.env.metaTitleSuffix ||  "Cloud Components Web-Builder";
+var metaIconURL =  process.env.metaIconURL;
 var oneWeekSeconds = 60 * 60 * 24 * 7;
 var oneWeekMilliseconds = oneWeekSeconds * 1000;
 
@@ -57,6 +58,7 @@ router.use(function (req, res, next) {
   vm.domain = req.protocol + '://' + req.get('host');
   vm.url = vm.domain + req.path;
   vm.googleAnalyticsAccount = config.googleAnalyticsAccount;
+  vm.metaIconURL = metaTitleSuffix;
 
   Q.all([
     postService.getAll(),
@@ -82,7 +84,19 @@ router.use(function (req, res, next) {
       }
       if (page.slug == "footer") {
         vm.footerBody = ejs.render(page.body, vm, {delimiter: '?', openDelimiter: '[', closeDelimiter: ']'})
+      }
+      if (page.slug == "script") {
+        vm.script = page.body
       }    
+      if (page.slug == "style") {
+        vm.style = page.body
+      }
+      if (page.slug == "script_include") {
+        vm.script_include = page.body
+      }
+      if (page.slug == "css_include") {
+        vm.css_include = page.body
+      }     
     });
     next();
 
@@ -151,6 +165,7 @@ router.get('/', function (req, res, next) {
 
       // meta tags
       vm.metaTitle = vm.page.title + metaTitleSuffix;
+      vm.metaDescription = vm.page.description + metaTitleSuffix;
       vm.metaDescription = vm.page.description + metaTitleSuffix;
 
       render('home/home.view.html', req, res);
