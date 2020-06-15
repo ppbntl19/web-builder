@@ -56,6 +56,6 @@ gulp.task('watch', function (done) {
 //gulp.task('default', ['watch', 'scripts', 'less']);
 //gulp.task('default', gulp.series(, 'scripts', 'less'));
 gulp.task('default', gulp.parallel(
-    'scripts'
+    'scripts', 'less'
 )
 );

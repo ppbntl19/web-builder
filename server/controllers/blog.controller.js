@@ -68,7 +68,9 @@ router.use(function (req, res, next) {
     var pages = data[1] || [];
     // if admin user is logged in return all posts, otherwise return only published posts
     vm.posts = vm.loggedIn ? posts : _.filter(posts, { 'publish': true });
-
+    vm.pages = data[1] ;
+    // if admin user is logged in return all posts, otherwise return only published posts
+    vm.unpublish_posts = vm.loggedIn ? posts : _.filter(posts, { 'publish': false });
     // add urls to posts
     vm.posts.forEach(function (post) {
       post.url = '/post/' + moment(post.publishDate).format('YYYY/MM/DD') + '/' + post.slug;
@@ -77,7 +79,7 @@ router.use(function (req, res, next) {
 
     loadYears();
     loadTags();
-    //Add dahsbaord component
+    //Add component whoch is applicate for all page
     pages.forEach(function (page) {
       if (page.slug == "header") {
         vm.headerBody = ejs.render(page.body, vm, {delimiter: '?', openDelimiter: '[', closeDelimiter: ']'})
@@ -162,7 +164,10 @@ router.get('/', function (req, res, next) {
       if (!page) return res.status(404).send('Not found');
 
       vm.page = page;
-
+      //support post list in home pgae
+      if ( vm.page.slug == "home") {
+        vm.page.body = ejs.render(vm.page.body, vm, {delimiter: '?', openDelimiter: '[', closeDelimiter: ']'})
+      }
       // meta tags
       vm.metaTitle = vm.page.title + metaTitleSuffix;
       vm.metaDescription = vm.page.description + metaTitleSuffix;
