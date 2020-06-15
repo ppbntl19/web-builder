@@ -22,17 +22,23 @@
                         ],
                         removePlugins: 'elementspath',
                         resize_enabled: false,
-                        allowedContent: true
+                        allowedContent: true,
+                        extraAllowedContent : true
                     };
                 } else {
                     // regular editor
                     editorOptions = {
                         filebrowserImageUploadUrl: '/uploader/upload.php',
                         removeButtons: 'About,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Save,CreateDiv,Language,BidiLtr,BidiRtl,Flash,Iframe,addFile,Styles',
-                        allowedContent: true
+                        allowedContent: true,
+                        extraAllowedContent : true
                     };
                 }
                 editorOptions.entities = false;
+                editorOptions.entities_greek = false;
+                editorOptions.basicEntities = false;
+                editorOptions.removePlugins = 'htmldataprocessor';
+
                 // enable ckeditor
                 var ckeditor = element.ckeditor(editorOptions);
                 var cloudName = 'db0gq7w3r';

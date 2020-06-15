@@ -1,0 +1,17 @@
+<div class="post-list">
+    <!--[? posts.forEach(function(post) { ?] -->
+    <div class="post">
+        <div class="container">
+            <div class="publish-date">[?= post.publishDateFormatted ?]</div>
+            <a href="[?= post.url ?]">
+
+                <h2 class="post-title">
+                    [?= post.title ?]
+                </h2>
+
+                <div class="post-summary" ng-non-bindable>[?- post.summary ?]</div>
+            </a>
+        </div>
+    </div>
+    <!-- [? }) ?] -->
+</div>

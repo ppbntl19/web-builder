@@ -95,11 +95,6 @@
                 document.body.scrollTop = document.documentElement.scrollTop = 0;
             }
 
-            $timeout(function () {
-                // run syntax highlighter plugin
-                SyntaxHighlighter.highlight();
-            });
-
             window.initialLoad = false;
         });
     }
