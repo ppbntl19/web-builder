@@ -14,7 +14,7 @@
     
     <% if(locals.css_include) { %>
         <%- locals.css_include %>
-    <% } 
+    <% }  %>
 
     <% if(locals.style) { %>
         <%- locals.style %>
@@ -32,7 +32,7 @@
             })(window, document, 'script', '/analytics.js?d=' + new Date().toISOString().slice(0, 13), 'ga');
             ga('create', '<%= locals.googleAnalyticsAccount %>', 'auto');
         </script>
-    <% } %>
+    <%  } %>
 
 </head>
 
@@ -47,7 +47,7 @@
             <div ng-non-bindable>
                 <%- include(locals.templateUrl) %>
             </div>
-        <% } %>
+        <%  } %>
 	</main>
 
     <!-- footer -->
@@ -58,7 +58,7 @@
 
     <% if(locals.script_include) { %>
         <%- locals.script_include %>
-    <% } 
+    <%  } %>
 
     <!-- Cusotm js -->
     <% if(locals.script) {  %>

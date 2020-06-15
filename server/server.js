@@ -51,7 +51,7 @@ app.get('/token', function (req, res) {
 if (process.env.enable_install) {
     app.use('/install', require('./controllers/install.controller'));
 }
-if (!process.env.enable_admin_panel) {
+if (process.env.enable_admin_panel) {
     app.use('/login', require('./controllers/login.controller'));
     // admin section
     app.use('/admin', require('./controllers/admin.controller'));
