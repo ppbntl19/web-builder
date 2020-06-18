@@ -22,25 +22,29 @@
                         ],
                         removePlugins: 'elementspath',
                         resize_enabled: false,
-                        allowedContent: true,
-                        extraAllowedContent : true
+                        allowedContent: true
                     };
                 } else {
                     // regular editor
                     editorOptions = {
                         filebrowserImageUploadUrl: '/uploader/upload.php',
                         removeButtons: 'About,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Save,CreateDiv,Language,BidiLtr,BidiRtl,Flash,Iframe,addFile,Styles',
-                        allowedContent: true,
-                        extraAllowedContent : true
+                        allowedContent: true
                     };
                 }
                 editorOptions.entities = false;
                 editorOptions.entities_greek = false;
                 editorOptions.basicEntities = false;
                 editorOptions.removePlugins = 'htmldataprocessor';
+                editorOptions.allowedContent= true;
+                editorOptions.extraAllowedContent = 'span(*)';
 
                 // enable ckeditor
                 var ckeditor = element.ckeditor(editorOptions);
+                CKEDITOR.dtd.$removeEmpty.a = 0;
+                CKEDITOR.dtd.$removeEmpty.span = 0;
+                CKEDITOR.dtd.$removeEmpty.i = 0;
+                                
                 var cloudName = 'db0gq7w3r';
 
                 var unsignedUploadPreset = 'sg9szjpu';
