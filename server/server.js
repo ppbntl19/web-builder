@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(session({
     secret: config.secret,
-    store: new MongoStore({ url: config.connectionString }),
+    store: new MongoStore({ url: config.connectionString,  useNewUrlParser: true  }),
     resave: false,
     saveUninitialized: true
 }));
